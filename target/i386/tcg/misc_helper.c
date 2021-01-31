@@ -411,59 +411,76 @@ void helper_rdmsr(CPUX86State *env)
     switch ((uint32_t)env->regs[R_ECX]) {
     case MSR_IA32_SYSENTER_CS:
         val = env->sysenter_cs;
+	trace_xrdmsr("MSR_IA32_SYSENTER_CS", MSR_IA32_SYSENTER_CS, val);
         break;
     case MSR_IA32_SYSENTER_ESP:
         val = env->sysenter_esp;
+	trace_xrdmsr("MSR_IA32_SYSENTER_ESP", MSR_IA32_SYSENTER_ESP, val);
         break;
     case MSR_IA32_SYSENTER_EIP:
         val = env->sysenter_eip;
+	trace_xrdmsr("MSR_IA32_SYSENTER_EIP", MSR_IA32_SYSENTER_EIP, val);
         break;
     case MSR_IA32_APICBASE:
         val = cpu_get_apic_base(env_archcpu(env)->apic_state);
+	trace_xrdmsr("MSR_IA32_APICBASE", MSR_IA32_APICBASE, val);
         break;
     case MSR_EFER:
         val = env->efer;
+	trace_xrdmsr("MSR_EFER", MSR_EFER, val);
         break;
     case MSR_STAR:
         val = env->star;
+	trace_xrdmsr("MSR_STAR", MSR_STAR, val);
         break;
     case MSR_PAT:
         val = env->pat;
+	trace_xrdmsr("MSR_PAT", MSR_PAT, val);
         break;
     case MSR_VM_HSAVE_PA:
         val = env->vm_hsave;
+	trace_xrdmsr("MSR_VM_HSAVE_PA", MSR_VM_HSAVE_PA, val);
         break;
     case MSR_IA32_PERF_STATUS:
         /* tsc_increment_by_tick */
         val = 1000ULL;
         /* CPU multiplier */
         val |= (((uint64_t)4ULL) << 40);
+	trace_xrdmsr("MSR_IA32_PERF_STATUS", MSR_IA32_PERF_STATUS, val);
         break;
 #ifdef TARGET_X86_64
     case MSR_LSTAR:
         val = env->lstar;
+	trace_xrdmsr("MSR_LSTAR", MSR_LSTAR, val);
         break;
     case MSR_CSTAR:
         val = env->cstar;
+	trace_xrdmsr("MSR_CSTAR", MSR_CSTAR, val);
         break;
     case MSR_FMASK:
         val = env->fmask;
+	trace_xrdmsr("MSR_FMASK", MSR_FMASK, val);
         break;
     case MSR_FSBASE:
         val = env->segs[R_FS].base;
+	trace_xrdmsr("MSR_FSBASE", MSR_FSBASE, val);
         break;
     case MSR_GSBASE:
         val = env->segs[R_GS].base;
+	trace_xrdmsr("MSR_GSBASE", MSR_GSBASE, val);
         break;
     case MSR_KERNELGSBASE:
         val = env->kernelgsbase;
+	trace_xrdmsr("MSR_KERNELGSBASE", MSR_KERNELGSBASE, val);
         break;
     case MSR_TSC_AUX:
         val = env->tsc_aux;
+	trace_xrdmsr("MSR_TSC_AUX", MSR_TSC_AUX, val);
         break;
 #endif
     case MSR_SMI_COUNT:
         val = env->msr_smi_count;
+	trace_xrdmsr("MSR_SMI_COUNT", MSR_SMI_COUNT, val);
         break;
     case MSR_MTRRphysBase(0):
     case MSR_MTRRphysBase(1):
@@ -489,6 +506,7 @@ void helper_rdmsr(CPUX86State *env)
         break;
     case MSR_MTRRfix64K_00000:
         val = env->mtrr_fixed[0];
+	trace_xrdmsr("MSR_MTRRfix64K_00000", MSR_MTRRfix64K_00000, val);
         break;
     case MSR_MTRRfix16K_80000:
     case MSR_MTRRfix16K_A0000:
@@ -508,6 +526,7 @@ void helper_rdmsr(CPUX86State *env)
         break;
     case MSR_MTRRdefType:
         val = env->mtrr_deftype;
+	trace_xrdmsr("MSR_MTRRdefType", MSR_MTRRdefType, val);
         break;
     case MSR_MTRRcap:
         if (env->features[FEAT_1_EDX] & CPUID_MTRR) {
@@ -517,9 +536,11 @@ void helper_rdmsr(CPUX86State *env)
             /* XXX: exception? */
             val = 0;
         }
+	trace_xrdmsr("MSR_MTRRcap", MSR_MTRRcap, val);
         break;
     case MSR_MCG_CAP:
         val = env->mcg_cap;
+	trace_xrdmsr("MSR_MCG_CAP", MSR_MCG_CAP, val);
         break;
     case MSR_MCG_CTL:
         if (env->mcg_cap & MCG_CTL_P) {
@@ -527,18 +548,23 @@ void helper_rdmsr(CPUX86State *env)
         } else {
             val = 0;
         }
+	trace_xrdmsr("MSR_MCG_CTL", MSR_MCG_CTL, val);
         break;
     case MSR_MCG_STATUS:
         val = env->mcg_status;
+	trace_xrdmsr("MSR_MCG_STATUS", MSR_MCG_STATUS, val);
         break;
     case MSR_IA32_MISC_ENABLE:
         val = env->msr_ia32_misc_enable;
+	trace_xrdmsr("MSR_IA32_MISC_ENABLE", MSR_IA32_MISC_ENABLE, val);
         break;
     case MSR_IA32_BNDCFGS:
         val = env->msr_bndcfgs;
+	trace_xrdmsr("MSR_IA32_BNDCFGS", MSR_IA32_BNDCFGS, val);
         break;
      case MSR_IA32_UCODE_REV:
         val = x86_cpu->ucode_rev;
+	trace_xrdmsr("MSR_IA32_UCODE_REV", MSR_IA32_UCODE_REV, val);
         break;
     default:
         if ((uint32_t)env->regs[R_ECX] >= MSR_MC0_CTL

@@ -1,0 +1,5 @@
+# See docs/devel/tracing.txt for syntax documentation.
+
+# misc_helper.c
+xrdmsr(const char * name, uint64_t addr, uint64_t val) "name %s " "addr= 0x%" PRIx64 " val= 0x%" PRIx64
+
