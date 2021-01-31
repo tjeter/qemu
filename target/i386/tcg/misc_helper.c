@@ -25,6 +25,7 @@
 #include "exec/cpu_ldst.h"
 #include "exec/address-spaces.h"
 #include "helper-tcg.h"
+#include "trace.h"
 
 /*
  * NOTE: the translator must set DisasContext.cc_op to CC_OP_EFLAGS
