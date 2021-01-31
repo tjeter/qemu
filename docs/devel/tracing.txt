@@ -12,6 +12,9 @@ for debugging, profiling, and observing execution.
     ./configure --enable-trace-backends=simple
     make
 
+    If this doesn't work, use ./configure --enable-trace-backends=log
+
+
 2. Create a file with the events you want to trace:
 
    echo memory_region_ops_read >/tmp/events
